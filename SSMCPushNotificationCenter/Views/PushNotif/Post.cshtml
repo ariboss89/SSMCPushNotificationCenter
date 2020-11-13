@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SSMCPushNotificationCenter.Models.tb_notification
+
+<div class="container" style="margin-top:20px">
+
+    @using (Html.BeginForm("Post", "PushNotif", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+                    @Html.AntiForgeryToken();
+
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Title)
+                        @Html.TextBoxFor(m => m.Title, new { Id = "title", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Title, "", new { @style = "color:red" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Message)
+                        @Html.TextAreaFor(m => m.Message, new { Id = "message", rows = "5", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Message, "", new { @style = "color:red" })
+                    </div>
+                    @*<div class="form-group">
+                        <img class="img-responsive" src="img_chania.jpg" alt="Notification Image">
+                        @Html.ValidationMessageFor(m => m.Images, "", new { @style = "color:red" })
+                    </div>*@
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Image)
+                        <input type="file" name="ImageData" id="ImageData" onchange="fileCheck(this);"                      
+                        @Html.ValidationMessageFor(m => m.Image, "", new { @style = "color:red" })
+                    </div>
+                    <div class="form-group">
+                         <button type="submit" class="btn btn-primary" id="btnPush" value="Post">Push Notification</button>
+                    </div>
+                    <div class="form-group">
+                    </div>
+                    <div class="form-group">
+                        @Html.ActionLink("Back to List", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    function fileCheck(obj) {
+        var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
+        if ($.inArray($(obj).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+            alert("Only .jpeg, .jpg, .png, .gif, .bmp formats are allowed.");
+        }
+    }
+</script>
+

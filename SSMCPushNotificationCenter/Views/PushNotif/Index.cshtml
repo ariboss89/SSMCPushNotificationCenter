@@ -1,0 +1,60 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model SSMCPushNotificationCenter.Models.tb_notification
+ 
+<div class="container" style="margin-top:20px">
+    <div class="form-group">
+        <table class="table table-responsive">
+            <tr>
+                <th> Id </th>
+                <th> Title </th>
+                <th> Message </th>
+                <th> Image </th>
+                <th> Status </th>
+                <th> Action </th>
+            </tr>
+
+            @if (Model != null)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Message)
+                    </td>
+                    <td>
+                        <img class="img-responsive" src="cinqueterre.jpg" class="img-rounded" alt="Notification Images">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => modelItem.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Push", "Edit", new { id = Model.Id })
+                    </td>
+                </tr>
+            }
+
+            else
+            {
+                <tr>
+                    <td> </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td>  </td>
+                    <td> @Html.ActionLink("Push", "Post") </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
